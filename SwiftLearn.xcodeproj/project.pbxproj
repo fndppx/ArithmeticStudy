@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		700DF1DA2E279F0D005623F4 /* ArithmeticLearnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */; };
+		700DF1DC2E27A063005623F4 /* SwiftGrammarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */; };
 		70A970EC2A832DA8005565EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970EB2A832DA8005565EA /* AppDelegate.swift */; };
-		70A970EE2A832DA8005565EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970ED2A832DA8005565EA /* SceneDelegate.swift */; };
 		70A970F02A832DA8005565EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970EF2A832DA8005565EA /* ViewController.swift */; };
 		70A970F32A832DA8005565EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70A970F12A832DA8005565EA /* Main.storyboard */; };
 		70A970F52A832DAA005565EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A970F42A832DAA005565EA /* Assets.xcassets */; };
@@ -37,9 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticLearnVC.swift; sourceTree = "<group>"; };
+		700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGrammarVC.swift; sourceTree = "<group>"; };
 		70A970E82A832DA8005565EA /* SwiftLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A970EB2A832DA8005565EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		70A970ED2A832DA8005565EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		70A970EF2A832DA8005565EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		70A970F22A832DA8005565EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		70A970F42A832DAA005565EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,8 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				70A970EB2A832DA8005565EA /* AppDelegate.swift */,
-				70A970ED2A832DA8005565EA /* SceneDelegate.swift */,
 				70A970EF2A832DA8005565EA /* ViewController.swift */,
+				700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */,
+				700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */,
 				70A9711B2A84842B005565EA /* HRHrvHelper.swift */,
 				70A970F12A832DA8005565EA /* Main.storyboard */,
 				70A970F42A832DAA005565EA /* Assets.xcassets */,
@@ -262,9 +265,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				70A970F02A832DA8005565EA /* ViewController.swift in Sources */,
+				700DF1DC2E27A063005623F4 /* SwiftGrammarVC.swift in Sources */,
 				70A970EC2A832DA8005565EA /* AppDelegate.swift in Sources */,
+				700DF1DA2E279F0D005623F4 /* ArithmeticLearnVC.swift in Sources */,
 				70A9711C2A84842B005565EA /* HRHrvHelper.swift in Sources */,
-				70A970EE2A832DA8005565EA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

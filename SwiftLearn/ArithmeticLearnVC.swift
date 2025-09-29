@@ -98,7 +98,7 @@ class ArithmeticLearnVC: UIViewController {
         let longestSubstring = findLongestSubstring(s: "ajbcdefgaklo")
         print("最长字符串不重复子串: \(longestSubstring)")
 
-//        // 9.字符串反转双指针
+//        // 9.字符串反转双指针 1
 //        let reversedString = reverseString(s: "hello")
 //        print("字符串反转: \(reversedString)")
 

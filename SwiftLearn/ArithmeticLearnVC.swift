@@ -37,7 +37,7 @@ class ArithmeticLearnVC: UIViewController {
         }
         
         //1.反转链表
-        if let reversedList = reveseList(node1) {
+        if let reversedList = reveseList(head: node1) {
             //打印反转后的链表
             current = reversedList
             while let node = current {
@@ -119,7 +119,7 @@ class ArithmeticLearnVC: UIViewController {
     }
 
     //1.反转链表
-    func reveseList(_ head: Node?) -> Node? {
+    func reveseList(head: Node?) -> Node? {
         var prev: Node? = nil
         var current: Node? = head
         while current != nil {

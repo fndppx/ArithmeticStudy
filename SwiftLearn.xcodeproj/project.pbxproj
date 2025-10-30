@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37957CEC2EA9D34A004BFAF9 /* ArithmeticLearnOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 37957CEB2EA9D34A004BFAF9 /* ArithmeticLearnOC.m */; };
 		700DF1DA2E279F0D005623F4 /* ArithmeticLearnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */; };
 		700DF1DC2E27A063005623F4 /* SwiftGrammarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */; };
 		70A970EC2A832DA8005565EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A970EB2A832DA8005565EA /* AppDelegate.swift */; };
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37957CEA2EA9D34A004BFAF9 /* ArithmeticLearnOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArithmeticLearnOC.h; sourceTree = "<group>"; };
+		37957CEB2EA9D34A004BFAF9 /* ArithmeticLearnOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArithmeticLearnOC.m; sourceTree = "<group>"; };
+		37957CED2EA9D34B004BFAF9 /* SwiftLearn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftLearn-Bridging-Header.h"; sourceTree = "<group>"; };
 		700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArithmeticLearnVC.swift; sourceTree = "<group>"; };
 		700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGrammarVC.swift; sourceTree = "<group>"; };
 		70A970E82A832DA8005565EA /* SwiftLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,10 +112,13 @@
 				700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */,
 				700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */,
 				70A9711B2A84842B005565EA /* HRHrvHelper.swift */,
+				37957CEA2EA9D34A004BFAF9 /* ArithmeticLearnOC.h */,
+				37957CEB2EA9D34A004BFAF9 /* ArithmeticLearnOC.m */,
 				70A970F12A832DA8005565EA /* Main.storyboard */,
 				70A970F42A832DAA005565EA /* Assets.xcassets */,
 				70A970F62A832DAA005565EA /* LaunchScreen.storyboard */,
 				70A970F92A832DAA005565EA /* Info.plist */,
+				37957CED2EA9D34B004BFAF9 /* SwiftLearn-Bridging-Header.h */,
 			);
 			path = SwiftLearn;
 			sourceTree = "<group>";
@@ -201,6 +208,7 @@
 				TargetAttributes = {
 					70A970E72A832DA8005565EA = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1640;
 					};
 					70A970FD2A832DAA005565EA = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -266,6 +274,7 @@
 			files = (
 				70A970F02A832DA8005565EA /* ViewController.swift in Sources */,
 				700DF1DC2E27A063005623F4 /* SwiftGrammarVC.swift in Sources */,
+				37957CEC2EA9D34A004BFAF9 /* ArithmeticLearnOC.m in Sources */,
 				70A970EC2A832DA8005565EA /* AppDelegate.swift in Sources */,
 				700DF1DA2E279F0D005623F4 /* ArithmeticLearnVC.swift in Sources */,
 				70A9711C2A84842B005565EA /* HRHrvHelper.swift in Sources */,
@@ -443,6 +452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NTYS5Y3BQZ;
@@ -461,6 +471,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.keyan.SwiftLearn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftLearn/SwiftLearn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,6 +483,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NTYS5Y3BQZ;
@@ -489,6 +502,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.keyan.SwiftLearn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftLearn/SwiftLearn-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

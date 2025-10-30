@@ -48,7 +48,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             // 跳转到算法学习页面
-            let arithmeticVC = ArithmeticLearnVC()
+            let arithmeticVC = ArithmeticLearnOC()
             navigationController?.pushViewController(arithmeticVC, animated: true)
         } else {
             

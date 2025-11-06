@@ -380,7 +380,7 @@
     return nil;
 }
 
-// 14.两数之和
+// 14.两数之和 字典保存第一次出现的值，后续target-第一个值=第二个值，则返回两个值的索引
 - (NSArray *)twoSum:(NSArray *)nums target:(NSInteger)target {
     NSMutableDictionary *numDict = [NSMutableDictionary dictionary];
     
@@ -516,4 +516,69 @@
     return result;
 }
 
+//数组中重复的数字
+- (NSInteger)findRepeatNumber:(NSArray *)nums {
+    NSMutableDictionary *numDict = [NSMutableDictionary dictionary];
+    for (NSInteger i = 0; i < [nums count]; i++) {
+        NSNumber *num = nums[i];
+        if (numDict[num]) {
+            return [num integerValue];
+        }
+        numDict[num] = @(i);
+    }
+    return -1;
+}
+
+//49. 字母异位词分组
+- (NSArray *)groupAnagrams:(NSArray *)strs {
+    NSMutableDictionary *anagramsDict = [NSMutableDictionary dictionary];
+    
+    for (NSString *str in strs) {
+        // 将字符串转换为字符数组并排序
+        NSMutableArray *chars = [NSMutableArray array];
+        for (NSInteger i = 0; i < [str length]; i++) {
+            [chars addObject:[NSString stringWithFormat:@"%c", [str characterAtIndex:i]]];
+        }
+        [chars sortUsingSelector:@selector(compare:)];
+        NSString *sortedStr = [chars componentsJoinedByString:@""];
+        
+        // 如果字典中没有这个key，创建一个新的数组
+        if (!anagramsDict[sortedStr]) {
+            anagramsDict[sortedStr] = [NSMutableArray array];
+        }
+        [anagramsDict[sortedStr] addObject:str];
+    }
+    
+    return [anagramsDict allValues];
+}
+
+//输入：nums = [100,4,200,1,3,2]
+//输出：4
+//解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
+//
+//输入：nums = [0,3,7,2,5,8,4,6,0,1]
+//输出：9
+
+- (NSInteger)longestConsecutive:(NSArray *)nums {
+    NSMutableSet *set = [NSMutableSet setWithArray:nums];
+    
+    NSInteger longgestNum = 0;
+    for (NSNumber *num in set) {
+        NSInteger numValue = [num integerValue];
+        if (![set containsObject:@(numValue - 1)]) {
+            
+            NSInteger curStreak = 1;
+            
+            while ([set containsObject:@(numValue + 1)]) {
+                numValue+=1;
+                curStreak+=1;
+            }
+            
+            longgestNum = MAX(longgestNum, curStreak);
+
+        }
+    }
+    
+    return longgestNum;
+}
 @end

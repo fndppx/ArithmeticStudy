@@ -146,6 +146,25 @@
             current = current.next;
         }
     }
+
+    NSInteger maxArea = [self maxArea:@[@(1), @(8), @(6), @(2), @(5), @(4), @(8), @(3), @(7)]];
+    NSLog(@"maxArea: %ld", (long)maxArea);
+
+    NSArray *threeSumResult = [self threeSum:@[@(-1), @(0), @(1), @(2), @(-1), @(-4)]];
+    NSLog(@"threeSumResult: %@", threeSumResult);
+    if (threeSumResult.count > 0) {
+        for (NSArray *array in threeSumResult) {
+            NSLog(@"%@", array);
+        }
+    }
+
+    NSArray *findAnagramsResult = [self findAnagrams:@"cbaebabacd" p:@"abc"];
+    NSLog(@"findAnagramsResult: %@", findAnagramsResult);
+    if (findAnagramsResult.count > 0) {
+        for (NSNumber *index in findAnagramsResult) {
+            NSLog(@"%ld", (long)[index integerValue]);
+        }
+    }
 }
 
 // 1.反转链表
@@ -596,5 +615,147 @@
     for (NSInteger j = i; j < nums.count; j++) {
         nums[j] = @(0);
     }
+}
+
+//盛最多水的容器
+- (NSInteger)maxArea:(NSArray *)height {
+    if (height.count == 0) {
+        return 0;
+    }
+    NSInteger left = 0;
+    NSInteger right = height.count - 1;
+    NSInteger maxArea = 0;
+    while (left < right) {
+        NSInteger minHeight = MIN([height[left] integerValue], [height[right] integerValue]);
+        maxArea = MAX(maxArea, minHeight * (right - left));
+        if ([height[left] integerValue] < [height[right] integerValue]) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return maxArea;
+}   
+
+
+// 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请你返回所有和为 0 且不重复的三元组。
+
+// 注意：答案中不可以包含重复的三元组。
+// 示例 1：
+
+// 输入：nums = [-1,0,1,2,-1,-4]
+// 输出：[[-1,-1,2],[-1,0,1]]
+// 解释：
+// nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。
+// nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。
+// nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
+// 不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。
+// 注意，输出的顺序和三元组的顺序并不重要。
+// 示例 2：
+
+// 输入：nums = [0,1,1]
+// 输出：[]
+// 解释：唯一可能的三元组和不为 0 。
+
+// 三数之和算法思路：
+// 1. 首先对数组进行排序，这样可以使用双指针技巧
+// 2. 固定第一个数nums[i]，然后在剩余数组中寻找两个数使得三数之和为0
+// 3. 使用双指针left和right分别指向i+1和数组末尾
+// 4. 如果sum == 0，找到一个解；如果sum < 0，left右移；如果sum > 0，right左移
+// 5. 为了避免重复解，需要跳过相同的元素
+- (NSArray *)threeSum:(NSArray *)nums {
+    if (nums.count < 3) {
+        return @[];
+    }
+    // 需要创建可变数组来排序，因为NSArray是不可变的
+    NSMutableArray *mutableNums = [nums mutableCopy];
+    [mutableNums sortUsingSelector:@selector(compare:)];
+    NSMutableArray *result = [NSMutableArray array];
+    for (NSInteger i = 0; i < mutableNums.count - 2; i++) { // 修改循环条件，避免越界
+        if (i > 0 && [mutableNums[i] integerValue] == [mutableNums[i - 1] integerValue]) {
+            continue;
+        }
+        NSInteger left = i + 1;
+        NSInteger right = mutableNums.count - 1;
+        while (left < right) {
+            NSInteger sum = [mutableNums[i] integerValue] + [mutableNums[left] integerValue] + [mutableNums[right] integerValue];
+            if (sum == 0) {
+                [result addObject:@[mutableNums[i], mutableNums[left], mutableNums[right]]]; // 直接使用NSNumber对象
+                while (left < right && [mutableNums[left] integerValue] == [mutableNums[left + 1] integerValue]) {
+                    left++;
+                }
+                while (left < right && [mutableNums[right] integerValue] == [mutableNums[right - 1] integerValue]) {
+                    right--;
+                }
+                left++;
+                right--;
+            } else if (sum < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+    return result;
+}
+//cbaebabacd" :@"abc
+// 给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
+- (NSArray *)findAnagrams:(NSString *)s p:(NSString *)p {
+    NSMutableArray *result = [NSMutableArray array];
+    
+    if (s.length < p.length) {
+        return result;
+    }
+    
+    // 创建字符频率字典
+    NSMutableDictionary *pFreq = [NSMutableDictionary dictionary];
+    NSMutableDictionary *windowFreq = [NSMutableDictionary dictionary];
+    
+    // 统计p中每个字符的频率
+    for (NSInteger i = 0; i < p.length; i++) {
+        NSString *char1 = [NSString stringWithFormat:@"%c", [p characterAtIndex:i]];
+        NSNumber *count = pFreq[char1];
+        pFreq[char1] = @((count ? count.integerValue : 0) + 1);
+    }
+    
+    // 滑动窗口
+    NSInteger windowSize = p.length;
+    
+    // 初始化第一个窗口
+    for (NSInteger i = 0; i < windowSize; i++) {
+        NSString *char1 = [NSString stringWithFormat:@"%c", [s characterAtIndex:i]];
+        NSNumber *count = windowFreq[char1];
+        windowFreq[char1] = @((count ? count.integerValue : 0) + 1);
+    }
+    
+    // 检查第一个窗口
+    if ([pFreq isEqualToDictionary:windowFreq]) {
+        [result addObject:@(0)];
+    }
+    
+    // 滑动窗口
+    for (NSInteger i = windowSize; i < s.length; i++) {
+        // 添加新字符
+        NSString *newChar = [NSString stringWithFormat:@"%c", [s characterAtIndex:i]];
+        NSNumber *newCount = windowFreq[newChar];
+        windowFreq[newChar] = @((newCount ? newCount.integerValue : 0) + 1);
+        
+        // 移除旧字符
+        NSString *oldChar = [NSString stringWithFormat:@"%c", [s characterAtIndex:i - windowSize]];
+        NSNumber *oldCountNum = windowFreq[oldChar];
+        NSInteger oldCount = (oldCountNum ? oldCountNum.integerValue : 0) - 1;
+        if (oldCount == 0) {
+            [windowFreq removeObjectForKey:oldChar];
+        } else {
+            windowFreq[oldChar] = @(oldCount);
+        }
+        
+        // 检查当前窗口
+        if ([pFreq isEqualToDictionary:windowFreq]) {
+            [result addObject:@(i - windowSize + 1)];
+        }
+    }
+    
+    return result;
 }
 @end

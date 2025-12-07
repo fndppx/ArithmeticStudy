@@ -758,4 +758,244 @@
     
     return result;
 }
+
+// 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+
+// 请你将两个数相加，并以相同形式返回一个表示和的链表。
+
+// 你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+
+- (Node *)addTwoNumbers:(Node *)l1 l2:(Node *)l2 {
+    Node *dummy = [[Node alloc] initWithValue:0];
+    Node *current = dummy;
+    NSInteger carry = 0;
+
+    // 遍历两条链表，逐位相加并处理进位
+    while (l1 != nil || l2 != nil || carry != 0) {
+        NSInteger x = l1 != nil ? l1.value : 0;
+        NSInteger y = l2 != nil ? l2.value : 0;
+        NSInteger sum = x + y + carry;
+
+        carry = sum / 10;
+        current.next = [[Node alloc] initWithValue:(sum % 10)];
+        current = current.next;
+
+        if (l1 != nil) {
+            l1 = l1.next;
+        }
+        if (l2 != nil) {
+            l2 = l2.next;
+        }
+    }
+
+    return dummy.next;
+}
+
+// 删除链表倒数第N个节点
+- (Node *)removeNthFromEnd:(Node *)head n:(NSInteger)n {
+    Node *dummy = [[Node alloc] initWithValue:0];
+    dummy.next = head;
+    Node *first = dummy;
+    Node *second = dummy;
+    // 这里 i < n + 1 的原因，是要让 first 指针比 second 指针多走 n+1 步（含 dummy 节点），这样 first 和 second 之间就相隔 n 个节点。
+    // 当 first 到达链表末尾时，second 指向要删除节点的前一个位置，从而便于删除倒数第 n 个节点。
+    for (NSInteger i = 0; i < n + 1; i++) {
+        first = first.next;
+    }
+    while (first != nil) {
+        first = first.next;
+        second = second.next;
+    }
+    second.next = second.next.next;
+    return dummy.next;
+}
+
+//两两交换链表中的节点
+- (Node *)swapPairs:(Node *)head {
+    Node *dummy = [[Node alloc] initWithValue:0];
+    dummy.next = head;
+    Node *current = dummy;
+    while (current.next != nil && current.next.next != nil) {
+        Node *first = current.next;
+        Node *second = current.next.next;
+        first.next = second.next;
+        second.next = first;
+        current.next = second;
+        current = first;
+    }
+    return dummy.next;
+}
+
+//二叉树的中序遍历
+- (void)inorderTraversal:(TreeNode *)root {
+    if (root == nil) {
+        return;
+    }
+    inorderTraversal(root.left);
+    NSLog(@"%ld", (long)root.value);
+    inorderTraversal(root.right);
+}
+
+//二叉树的最大深度
+- (NSInteger)maxDepth:(TreeNode *)root {
+    if (root == nil) {
+        return 0;
+    }
+    return MAX(maxDepth(root.left), maxDepth(root.right)) + 1;
+}
+
+
+//反转二叉树
+- (TreeNode *)invertTree:(TreeNode *)root {
+    if (root == nil) {
+        return nil;
+    }
+    TreeNode *left = root.left;
+    TreeNode *right = root.right;
+    root.left = invertTree(right);
+    root.right = invertTree(left);
+    return root;
+}
+
+//对称二叉树
+- (BOOL)isSymmetric:(TreeNode *)root {
+    return [self isMirror:root.left right:root.right];
+}
+
+- (BOOL)isMirror:(TreeNode *)left right:(TreeNode *)right {
+    if (left == nil && right == nil) {
+        return YES;
+    }
+    if (left == nil || right == nil) {
+        return NO;
+    }
+    if (left.value != right.value) {
+        return NO;
+    }
+    return [self isMirror:left.left right:right.right] && [self isMirror:left.right right:right.left];
+}
+    
+//二叉树的直径
+- (NSInteger)diameterOfBinaryTree:(TreeNode *)root {
+    if (root == nil) {
+        return 0;
+    }
+    return MAX(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)) + 1;
+}
+
+//二叉树的层序遍历
+- (void)levelOrderTraversal:(TreeNode *)root {
+    if (root == nil) {
+        return;
+    }
+    NSMutableArray *queue = [NSMutableArray array];
+    [queue addObject:root];
+    while (queue.count > 0) {
+        TreeNode *node = [queue firstObject];
+        NSLog(@"%ld", (long)node.value);
+        if (node.left != nil) {
+            [queue addObject:node.left];
+        }
+        if (node.right != nil) {
+            [queue addObject:node.right];
+        }
+        [queue removeObjectAtIndex:0]; // 移除第一个元素    
+    }
+}
+
+//将有序数组转换为二叉搜索树
+- (TreeNode *)sortedArrayToBST:(NSArray *)nums {
+    if (nums.count == 0) {
+        return nil;
+    }
+    return [self sortedArrayToBST:nums index:(nums.count - 1) / 2];
+}
+
+- (TreeNode *)sortedArrayToBST:(NSArray *)nums index:(NSInteger)index {
+    if (index < 0 || index >= nums.count) {
+        return nil;
+    }
+    TreeNode *node = [[TreeNode alloc] initWithValue:[nums[index] integerValue]];
+    node.left = [self sortedArrayToBST:nums index:(index - 1) / 2];
+    node.right = [self sortedArrayToBST:nums index:(index + 1) / 2];
+    return node;
+}
+
+//从前序和中序遍历序列构造二叉树
+- (TreeNode *)buildTree:(NSArray *)preorder inorder:(NSArray *)inorder {
+    if (preorder.count == 0 || inorder.count == 0) {
+        return nil;
+    }   
+    return [self buildTree:preorder preStart:0 preEnd:preorder.count - 1 inorder:inorder inStart:0 inEnd:inorder.count - 1];
+}
+
+- (TreeNode *)buildTree:(NSArray *)preorder index:(NSInteger)index inorder:(NSArray *)inorder index:(NSInteger)index {
+    if (index < 0 || index >= preorder.count) {
+        return nil;
+    }
+    TreeNode *node = [[TreeNode alloc] initWithValue:[preorder[index] integerValue]];
+    node.left = [self buildTree:preorder index:index + 1 inorder:inorder index:index];
+    node.right = [self buildTree:preorder index:index + 1 inorder:inorder index:index];
+    return node;
+}
+
+//搜索插入位置
+- (NSInteger)searchInsert:(NSArray *)nums target:(NSInteger)target {
+    if (nums.count == 0) {
+        return 0;
+    }
+    return [self searchInsert:nums target:target index:0];
+}
+
+- (NSInteger)searchInsert:(NSArray *)nums target:(NSInteger)target index:(NSInteger)index {
+    if (index < 0 || index >= nums.count) {
+        return index;
+    }
+    if ([nums[index] integerValue] == target) {
+        return index;
+    }
+    if ([nums[index] integerValue] > target) {
+        return [self searchInsert:nums target:target index:index - 1];
+    }
+    return [self searchInsert:nums target:target index:index + 1];
+}
+
+//买卖股票的最佳时机
+- (NSInteger)maxProfit:(NSArray *)prices {
+    NSInteger minPrice = NSIntegerMax, maxProfit = 0;
+    for (NSNumber *price in prices) {
+        minPrice = MIN(minPrice, price.integerValue);
+        maxProfit = MAX(maxProfit, price.integerValue - minPrice);
+    }
+    return maxProfit;
+}
+
+//只出现一次的数字
+- (NSInteger)singleNumber:(NSArray *)nums {
+    NSMutableDictionary *map = [NSMutableDictionary dictionary];
+    for (NSNumber *num in nums) {
+        NSNumber *count = map[num];
+        if (count) {
+            map[num] = @(count.integerValue + 1);
+        } else {
+            map[num] = @(1);
+        }
+    }
+    for (NSNumber *key in map) {
+        if ([map[key] integerValue] == 1) {
+            return key.integerValue;
+        }
+    }
+    return 0;
+}
+
+//多数元素
+- (NSInteger)majorityElement:(NSArray *)nums {
+    NSInteger candidate = 0, count = 0;
+    for (NSNumber *num in nums) {
+        count += (count == 0 || candidate == num.integerValue) ? 1 : -1;
+        if (count == 1) candidate = num.integerValue;
+    }
+    return candidate;
+}
 @end

@@ -26,6 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TreeNode : NSObject
+
+@property (nonatomic, assign) NSInteger value;
+@property (nonatomic, strong, nullable) TreeNode *left;
+@property (nonatomic, strong, nullable) TreeNode *right;
+
+@end
+
 @interface ArithmeticLearnOC : UIViewController
 
 @end

@@ -67,6 +67,20 @@
 
 @end
 
+@implementation TreeNode
+
+- (instancetype)initWithValue:(NSInteger)value {
+    self = [super init];
+    if (self) {
+        _value = value;
+        _left = nil;
+        _right = nil;
+    }
+    return self;
+}
+
+@end
+
 @interface ArithmeticLearnOC ()
 
 @property (nonatomic, strong) NSMutableArray *result;
@@ -827,22 +841,22 @@
 }
 
 //二叉树的中序遍历
-- (void)inorderTraversal:(TreeNode *)root {
-    if (root == nil) {
-        return;
-    }
-    inorderTraversal(root.left);
-    NSLog(@"%ld", (long)root.value);
-    inorderTraversal(root.right);
-}
+//- (void)inorderTraversal:(TreeNode *)root {
+//    if (root == nil) {
+//        return;
+//    }
+//    inorderTraversal(root.left);
+//    NSLog(@"%ld", (long)root.value);
+//    inorderTraversal(root.right);
+//}
 
 //二叉树的最大深度
-- (NSInteger)maxDepth:(TreeNode *)root {
-    if (root == nil) {
-        return 0;
-    }
-    return MAX(maxDepth(root.left), maxDepth(root.right)) + 1;
-}
+//- (NSInteger)maxDepth:(TreeNode *)root {
+//    if (root == nil) {
+//        return 0;
+//    }
+//    return MAX(maxDepth(root.left), maxDepth(root.right)) + 1;
+//}
 
 
 //反转二叉树
@@ -852,8 +866,8 @@
     }
     TreeNode *left = root.left;
     TreeNode *right = root.right;
-    root.left = invertTree(right);
-    root.right = invertTree(left);
+    root.left = [self invertTree:right];
+    root.right = [self invertTree:left];
     return root;
 }
 
@@ -876,12 +890,12 @@
 }
     
 //二叉树的直径
-- (NSInteger)diameterOfBinaryTree:(TreeNode *)root {
-    if (root == nil) {
-        return 0;
-    }
-    return MAX(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)) + 1;
-}
+//- (NSInteger)diameterOfBinaryTree:(TreeNode *)root {
+//    if (root == nil) {
+//        return 0;
+//    }
+//    return MAX(diameterOfBinaryTree(root.left), diameterOfBinaryTree(root.right)) + 1;
+//}
 
 //二叉树的层序遍历
 - (void)levelOrderTraversal:(TreeNode *)root {
@@ -922,12 +936,12 @@
 }
 
 //从前序和中序遍历序列构造二叉树
-- (TreeNode *)buildTree:(NSArray *)preorder inorder:(NSArray *)inorder {
-    if (preorder.count == 0 || inorder.count == 0) {
-        return nil;
-    }   
-    return [self buildTree:preorder preStart:0 preEnd:preorder.count - 1 inorder:inorder inStart:0 inEnd:inorder.count - 1];
-}
+//- (TreeNode *)buildTree:(NSArray *)preorder inorder:(NSArray *)inorder {
+//    if (preorder.count == 0 || inorder.count == 0) {
+//        return nil;
+//    }   
+//    return [self buildTree:preorder preStart:0 preEnd:preorder.count - 1 inorder:inorder inStart:0 inEnd:inorder.count - 1];
+//}
 
 - (TreeNode *)buildTree:(NSArray *)preorder index:(NSInteger)index inorder:(NSArray *)inorder index:(NSInteger)index {
     if (index < 0 || index >= preorder.count) {
@@ -997,5 +1011,35 @@
         if (count == 1) candidate = num.integerValue;
     }
     return candidate;
+}
+
+//用两个栈实现队列
+- (void)push:(NSInteger)value {
+    [self.stack1 addObject:@(value)];
+}
+
+- (NSInteger)pop {
+    if (self.stack2.count == 0) {
+        while (self.stack1.count > 0) {
+            [self.stack2 addObject:[self.stack1 lastObject]];
+            [self.stack1 removeLastObject];
+        }
+    }
+    return [[self.stack2 lastObject] integerValue];
+    [self.stack2 removeLastObject];
+}
+
+- (NSInteger)peek {
+    if (self.stack2.count == 0) {
+        while (self.stack1.count > 0) {
+            [self.stack2 addObject:[self.stack1 lastObject]];
+            [self.stack1 removeLastObject];
+        }
+    }
+    return [[self.stack2 lastObject] integerValue];
+}
+
+- (BOOL)isEmpty {
+    return self.stack1.count == 0 && self.stack2.count == 0;
 }
 @end

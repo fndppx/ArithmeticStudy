@@ -179,6 +179,14 @@
             NSLog(@"%ld", (long)[index integerValue]);
         }
     }
+
+    NSArray *longestConsecutive1Result = [self longestConsecutive1:@[@(3), @(1), @(5), @(2), @(6), @(8)]];
+    NSLog(@"longestConsecutive1Result: %@", longestConsecutive1Result);
+    // if (longestConsecutive1Result.count > 0) {
+    //     for (NSNumber *num in longestConsecutive1Result) {
+    //         NSLog(@"%ld", (long)[num integerValue]);
+    //     }
+    // }
 }
 
 // 1.反转链表
@@ -1014,6 +1022,7 @@
 }
 
 //用两个栈实现队列
+/*
 - (void)push:(NSInteger)value {
     [self.stack1 addObject:@(value)];
 }
@@ -1041,5 +1050,36 @@
 
 - (BOOL)isEmpty {
     return self.stack1.count == 0 && self.stack2.count == 0;
+}
+ */
+
+
+// 给定一个正整数数组array[]，找出其中连续序列最长的数组，并有序的输出结果
+// 例如： int[] arrays = {3, 1, 5, 2, 6, 8 }, 这个数组中有两个连续序列{1, 2, 3}、{5, 6}，输出结果为{1, 2, 3}
+- (NSArray *)longestConsecutive1:(NSArray *)arrays {
+    if (arrays.count == 0) return @[];
+    
+    NSSet *numSet = [NSSet setWithArray:arrays];
+    NSInteger maxLength = 0, startNum = 0;
+    
+    for (NSNumber *num in arrays) {
+        NSInteger n = [num integerValue];
+        // 只从序列起点开始扩展
+        if (![numSet containsObject:@(n - 1)]) {
+            NSInteger len = 1;
+            while ([numSet containsObject:@(n + len)]) len++;
+            if (len > maxLength) {
+                maxLength = len;
+                startNum = n;
+            }
+        }
+    }
+    
+    // 构建结果数组
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:maxLength];
+    for (NSInteger i = 0; i < maxLength; i++) {
+        [result addObject:@(startNum + i)];
+    }
+    return result;
 }
 @end

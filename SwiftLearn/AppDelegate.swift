@@ -30,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 显示窗口
         window?.makeKeyAndVisible()
         
+        let array:Array = [3, 1, 5, 2, 6, 8, 7];
+        ArithmeticLearnOC.longSubList(array);
+        
         return true
     }
 }

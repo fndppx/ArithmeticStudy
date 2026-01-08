@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface ArithmeticLearnOC : UIViewController
-
++ (void)longSubList:(NSArray *)originArr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1082,4 +1082,32 @@
     }
     return result;
 }
+
+//例如： int[] arrays = {3, 1, 5, 2, 6, 8, 7}, 这个数组中有两个连续序列{1, 2, 3}、{5, 6, 7, 8}，输出结果为{5, 6, 7, 8}
++ (void)longSubList:(NSArray *)originArr {
+    
+    NSMutableArray *array = [originArr mutableCopy];
+//    NSMutableDictionary *tempDic = [NSMutableDictionary new];
+    [array sortUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
+        return obj1.integerValue < obj2.integerValue?NSOrderedAscending:NSOrderedDescending;
+    }];
+    int maxLength = 0;
+    int startIndex = 0;
+    for (int i = 0; i<array.count-1; i++) {
+        int num = [array[i] intValue];
+        int nextNum = [array[i + 1] intValue];
+        
+        if (nextNum - num != 1) {
+            startIndex++;
+        }
+        
+        maxLength++;
+        
+        maxLength = MAX(maxLength - startIndex, maxLength);
+        
+    }
+    
+    NSLog(@"1");
+    // start maxLength
+}
 @end

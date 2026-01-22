@@ -1110,4 +1110,44 @@
     NSLog(@"1");
     // start maxLength
 }
+
+//最大子数组和
+- (void)findMaxSumSubArray {
+    
+    NSArray *array = @[@1, @2, @-3, @5];
+    // 边界条件检查
+    if (array.count == 0) {
+        NSLog(@"数组为空");
+        return;
+    }
+    
+    NSInteger currentSum = [array[0] integerValue];
+    NSInteger maxSum = currentSum;
+    
+    NSInteger bestStart = 0;
+    NSInteger bestEnd = 0;
+    NSInteger currentStart = 0;
+    for (int i = 1; i<array.count; i++) {
+        
+        NSInteger num = [array[i] integerValue];
+        if (currentSum + num < num) {
+            currentSum = num;
+            currentStart = i;
+        } else {
+            currentSum = currentSum + num;
+        }
+        
+        // 如果当前和超过历史最大值，则更新最大和及其区间
+        if (currentSum > maxSum) {
+            maxSum = currentSum;
+            bestStart = currentStart;
+            bestEnd = i; // 终点就是当前元素索引
+        }
+
+    }
+    
+    // 根据记录的最佳范围截取子数组
+    NSArray *maxSubarray = [array subarrayWithRange:NSMakeRange(bestStart, bestEnd - bestStart + 1)];
+    NSLog(@"array===%@",array);
+}
 @end

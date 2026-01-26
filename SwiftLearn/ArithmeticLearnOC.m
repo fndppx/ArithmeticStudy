@@ -1150,4 +1150,176 @@
     NSArray *maxSubarray = [array subarrayWithRange:NSMakeRange(bestStart, bestEnd - bestStart + 1)];
     NSLog(@"array===%@",array);
 }
+
+//快速排序
+int partition(int array[], int low, int high) {
+    int pivot = array[low];
+    while (low < high) {
+        while (low < high && array[high] >= pivot) {
+            --high;
+        }
+        
+        array[low] = array[high];
+        
+        while (low < high && array[low] <= pivot) {
+            ++low;
+        }
+        
+        array[high] = array[low];
+    }
+    
+    array[low] = pivot;
+    return pivot;
+}
+
+void quickSort(int array[], int low, int high) {
+    if (low < high) {
+        int pivot = partition(array, low, high);
+        
+        quickSort(array, low, pivot);
+        quickSort(array, pivot+1, high);
+
+    }
+}
+
+//冒泡
+void bubbleSort(int array[], int n) {
+    for (int i = 0; i<n - 1; i++) {
+        BOOL flag = true;
+
+        for (int j = 0; j<n - i - 1; j++) {
+            if (array[j] > array[j+1]) {
+                int temp = array[j+1];
+                array[j+1] = array[j];
+                array[j] = temp;
+                
+                flag = false;
+            }
+        }
+        
+        if (flag) {
+            break;
+        }
+    }
+}
+
+//选择
+void swap(int a, int b) {
+    if (&a != &b) {
+        a = a^b;
+        b = a^b;
+        a = a^b;
+    }
+}
+void selectionSort(int array[], int n) {
+    
+    for (int i = 0; i<n-1; i++) {
+        int minIndex = i;
+        for (int j = i+1; j<n; j++) {
+            
+            if (array[j]<array[minIndex]) {
+                minIndex = j;
+            }
+        }
+        
+        if (minIndex != i) {
+            swap(array[i], array[minIndex]);
+        }
+    }
+}
+
+//希尔
+void shellSort(int arr[], int n) {
+    // 使用Knuth增量序列
+    for (int gap = n / 2; gap > 0; gap /= 2) {
+        // 对每个gap进行插入排序
+        for (int i = gap; i < n; i++) {
+            int temp = arr[i];
+            int j;
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                arr[j] = arr[j - gap];
+            }
+            arr[j] = temp;
+        }
+    }
+}
+
+//归并排序
+// 优化后的归并排序
+
+void merge(int array[], int left, int mid, int right) {
+    int n = right - left + 1;
+    int temp[n]; 
+    int i = left, j = mid + 1, k = 0;
+
+    // 合并两个有序区域
+    while (i <= mid && j <= right) {
+        if (array[i] <= array[j]) {
+            temp[k++] = array[i++];
+        } else {
+            temp[k++] = array[j++];
+        }
+    }
+    // 复制剩余
+    while (i <= mid) {
+        temp[k++] = array[i++];
+    }
+    while (j <= right) {
+        temp[k++] = array[j++];
+    }
+    // 复制回原数组
+    for (int m = 0; m < n; m++) {
+        array[left + m] = temp[m];
+    }
+}
+
+void mergeSort(int array[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(array, left, mid);
+        mergeSort(array, mid + 1, right);
+        merge(array, left, mid, right);
+    }
+}
+
+//堆排序
+void heapify(int array[], int n, int i) {
+    int largest = i; // 初始化最大为根节点
+    int left = 2 * i + 1; // 左孩子
+    int right = 2 * i + 2; // 右孩子
+
+    // 如果左孩子比根节点大
+    if (left < n && array[left] > array[largest])
+        largest = left;
+
+    // 如果右孩子比目前最大的还要大
+    if (right < n && array[right] > array[largest])
+        largest = right;
+
+    // 如果最大不是根节点
+    if (largest != i) {
+        int temp = array[i];
+        array[i] = array[largest];
+        array[largest] = temp;
+        // 递归堆化子树
+        heapify(array, n, largest);
+    }
+}
+
+void heapSort(int array[], int n) {
+    // 构建最大堆
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(array, n, i);
+
+    // 一个个取出元素
+    for (int i = n - 1; i > 0; i--) {
+        // 先将当前最大值（堆顶）放到数组末尾
+        int temp = array[0];
+        array[0] = array[i];
+        array[i] = temp;
+
+        // 调整剩下的堆
+        heapify(array, i, 0);
+    }
+}
 @end

@@ -8,5 +8,7 @@
 #import "NSObject+ArithmeticLearnOC.h"
 
 @implementation NSObject (ArithmeticLearnOC)
-
+- (void)test1 {
+    NSLog(@"ArithmeticLearnOC");
+}
 @end

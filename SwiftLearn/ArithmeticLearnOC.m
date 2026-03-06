@@ -91,6 +91,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    dispatch_queue_t queue = dispatch_queue_create("11", DISPATCH_QUEUE_SERIAL);
+//    
+//    dispatch_async(queue, ^{
+//        sleep(2);
+//        NSLog(@"[queue]111");
+//
+//    });
+//    
+//    dispatch_sync(queue, ^{
+//        sleep(1);
+//        NSLog(@"[queue]222");
+//    });
+//    
+//    sleep(1);
+//    NSLog(@"[queue]333");
+    
+    
+    
     self.title = @"算法学习OC";
     self.view.backgroundColor = [UIColor whiteColor];
     

@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (ArithmeticLearnOC)
-
++ (void)test1;
 @end
 
 NS_ASSUME_NONNULL_END

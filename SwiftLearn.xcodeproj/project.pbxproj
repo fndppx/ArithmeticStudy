@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3771D3842F343BDD00793623 /* NSObject+ArithmeticLearnOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3771D3832F343BDD00793623 /* NSObject+ArithmeticLearnOC.m */; };
 		37957CEC2EA9D34A004BFAF9 /* ArithmeticLearnOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 37957CEB2EA9D34A004BFAF9 /* ArithmeticLearnOC.m */; };
 		700DF1DA2E279F0D005623F4 /* ArithmeticLearnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DF1D92E279F0D005623F4 /* ArithmeticLearnVC.swift */; };
 		700DF1DC2E27A063005623F4 /* SwiftGrammarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700DF1DB2E27A063005623F4 /* SwiftGrammarVC.swift */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3771D3822F343BDD00793623 /* NSObject+ArithmeticLearnOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+ArithmeticLearnOC.h"; sourceTree = "<group>"; };
+		3771D3832F343BDD00793623 /* NSObject+ArithmeticLearnOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ArithmeticLearnOC.m"; sourceTree = "<group>"; };
 		37957CEA2EA9D34A004BFAF9 /* ArithmeticLearnOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArithmeticLearnOC.h; sourceTree = "<group>"; };
 		37957CEB2EA9D34A004BFAF9 /* ArithmeticLearnOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArithmeticLearnOC.m; sourceTree = "<group>"; };
 		37957CED2EA9D34B004BFAF9 /* SwiftLearn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftLearn-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				70A9711B2A84842B005565EA /* HRHrvHelper.swift */,
 				37957CEA2EA9D34A004BFAF9 /* ArithmeticLearnOC.h */,
 				37957CEB2EA9D34A004BFAF9 /* ArithmeticLearnOC.m */,
+				3771D3822F343BDD00793623 /* NSObject+ArithmeticLearnOC.h */,
+				3771D3832F343BDD00793623 /* NSObject+ArithmeticLearnOC.m */,
 				70A970F12A832DA8005565EA /* Main.storyboard */,
 				70A970F42A832DAA005565EA /* Assets.xcassets */,
 				70A970F62A832DAA005565EA /* LaunchScreen.storyboard */,
@@ -276,6 +281,7 @@
 				700DF1DC2E27A063005623F4 /* SwiftGrammarVC.swift in Sources */,
 				37957CEC2EA9D34A004BFAF9 /* ArithmeticLearnOC.m in Sources */,
 				70A970EC2A832DA8005565EA /* AppDelegate.swift in Sources */,
+				3771D3842F343BDD00793623 /* NSObject+ArithmeticLearnOC.m in Sources */,
 				700DF1DA2E279F0D005623F4 /* ArithmeticLearnVC.swift in Sources */,
 				70A9711C2A84842B005565EA /* HRHrvHelper.swift in Sources */,
 			);
